@@ -1,0 +1,65 @@
+<html>
+<head>
+  <script>
+    // 定义一个函数来读取txt文档的内容
+    function readText() {
+      // 获取用户输入的txt文档的路径
+      let path = document.getElementById("path").value;
+      // 使用fetch函数来发送请求
+      fetch(path)
+        .then(function(response) {
+          // 如果请求成功
+          if (response.ok) {
+            // 返回响应的文本内容
+            return response.text();
+          }
+          // 如果请求失败
+          else {
+            // 抛出错误信息
+            throw new Error("读取失败：" + response.statusText);
+          }
+        })
+        .then(function(text) {
+          // 显示文本内容
+          document.getElementById("content").innerHTML = text;
+        })
+        .catch(function(error) {
+          // 显示错误信息
+          document.getElementById("content").innerHTML = error.message;
+        });
+    }
+
+    // 定义一个函数来搜索关键词
+    function searchKeyword() {
+      // 获取用户输入的关键词
+      let keyword = document.getElementById("keyword").value;
+      // 获取文本内容
+      let text = document.getElementById("content").innerHTML;
+      // 搜索关键词在文本中的位置
+      let index = text.indexOf(keyword);
+      // 如果找到了关键词
+      if (index != -1) {
+        // 显示关键词所在的位置和上下文
+        document.getElementById("result").innerHTML = "找到了：" + text.substring(index - 10, index + 10);
+      }
+      // 如果没有找到关键词
+      else {
+        // 显示提示信息
+        document.getElementById("result").innerHTML = "没有找到：" + keyword;
+      }
+    }
+  </script>
+</head>
+<body>
+  <p>请输入txt文档的路径：</p>
+  <input type="text" id="path">
+  <button onclick="readText()">读取</button>
+  <p>请输入要搜索的关键词：</p>
+  <input type="text" id="keyword">
+  <button onclick="searchKeyword()">搜索</button>
+  <p>文档内容：</p>
+  <div id="content"></div>
+  <p>搜索结果：</p>
+  <div id="result"></div>
+</body>
+</html>

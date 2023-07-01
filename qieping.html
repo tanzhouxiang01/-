@@ -1,0 +1,24 @@
+<html>
+<head>
+  <script>
+    // 定义一个变量来记录切屏次数
+    let count = 0;
+
+    // 定义一个函数来处理visibilitychange事件
+    function handleVisibilityChange() {
+      // 如果网页不可见，就增加切屏次数
+      if (document.hidden) {
+        count++;
+      }
+      // 更新<h1>标签的内容
+      document.getElementById("count").innerHTML = "你已经切屏了" + count + "次";
+    }
+
+    // 监听visibilitychange事件
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+  </script>
+</head>
+<body>
+  <h1 id="count">你已经切屏了0次</h1>
+</body>
+</html>
