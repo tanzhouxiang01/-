@@ -2,6 +2,22 @@
 <head>
   <title>我的网页</title>
   <script>
+        function searchContent() {
+      var searchText = document.getElementById('searchInput').value.trim(); // 获取搜索关键字
+      var contentDiv = document.getElementById('content'); // 获取内容区域元素
+
+          
+      // 遍历内容区域的子元素，查找匹配的内容并高亮显示
+      for (var i = 0; i < contentDiv.children.length; i++) {
+        var child = contentDiv.children[i];
+        if (child.textContent.includes(searchText)) {
+          child.style.backgroundColor = 'yellow';
+        } else {
+          child.style.backgroundColor = 'transparent';
+        }
+      }
+    }
+          
     //这个函数用来复制网页内容
     function copyContent() {
       //获取网页内容的元素
@@ -37,6 +53,9 @@
     }
   </script>
 <body>
+     <label for="searchInput">搜索内容：</label>
+    <input type="text" id="searchInput" placeholder="输入搜索关键字">
+    <button onclick="searchContent()">搜索</button>
   <!-- 创建一个div元素，用来放置按钮 -->
   <div id="buttons">
     <!-- 创建一个复制按钮，绑定点击事件 -->
